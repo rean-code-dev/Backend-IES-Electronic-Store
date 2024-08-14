@@ -1,0 +1,19 @@
+.mainHeader{
+    background-color: green;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu{
+    list-style-type: none;
+    cursor: pointer;
+    display: flex;
+}
+.menuItem {
+    padding: 10px;
+    text-decoration: none;
+}
+/* .menuItem a:hover{
+
+} */
