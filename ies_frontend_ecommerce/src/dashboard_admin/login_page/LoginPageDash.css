@@ -1,9 +1,98 @@
-.LoginDashboard {
-    background-color: rgb(216, 30, 17);
-    padding: 20px;
-    height: 300px;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
 
+
+/* body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top right, #a1c4fd, #c2e9fb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.LoginDashboard {
+    background: url('https://static.vecteezy.com/system/resources/previews/027/052/565/non_2x/computer-futuristic-high-tech-circuit-board-with-microcircuits-and-electronic-chips-with-transistors-and-resistors-ai-generated-free-photo.jpg') ;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LoginDashboardContainer {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+}
+
+.LoginDashboardContainer h2 {
+    margin-bottom: 24px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.LoginDashboardContainer input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 16px;
+}
+
+.LoginDashboardContainer input::placeholder {
+    color: #fff;
+}
+
+.LoginDashboardContainer button {
+    width: 100%;
+    padding: 12px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.LoginDashboardContainer button:hover {
+    background-color: #5548c8;
+}
+
+.LoginDashboardContainer .checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.LoginDashboardContainer .checkbox input {
+    margin-right: 8px;
+}
+
+.LoginDashboardContainer .register-link {
+    margin-top: 16px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.LoginDashboardContainer .register-link a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.LoginDashboardContainer .register-link a:hover {
+    text-decoration: underline;
 }

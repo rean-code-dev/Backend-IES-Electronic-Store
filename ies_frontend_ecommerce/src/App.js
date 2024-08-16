@@ -1,7 +1,9 @@
 
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import CategoryPageDash from './dashboard_admin/category_page/CategoryPageDash';
 import HomePageDash from './dashboard_admin/home_page/HomePageDash';
+import EmployeePageDash from './dashboard_admin/employee_page/EmployeePageDash';
 import RouteNoteFound from './dashboard_admin/route_not_found/RouteNotFound';
 import LoginDashboard from './dashboard_admin/login_page/LoginPageDash';
 import LayoutDashboardLogin from './components/layout/LayoutDashboardLogin';
@@ -17,6 +19,7 @@ function App() {
         <Route path="/dashboard" element ={<LayoutDashboard/>}>
         <Route path="" element={<HomePageDash/>} />
           <Route path="category" element={<CategoryPageDash/>} />
+          <Route path="employee" element={<EmployeePageDash/>} />
           <Route path="*" element={<RouteNoteFound/>} />
           
         

@@ -7,10 +7,13 @@ function CategoryPageDash (){
     
     const [show,setShow] = useState(false)
     const [showFormCrate,setShowFormCreate] = useState(false)
-    const [list,setList] = useState([])
+    const [result,setList] = useState([])
     const [item,setItem] = useState({})
 
-    const [category_name,setCategoryName] = useState("")
+    const [name_en,setNameEn] = useState("")
+    const [name_kh,setNameKh] = useState("")
+    
+    const [image, setImage] = useState("")
     const [description, setDescription] = useState("")
     const [status,setStatus] = useState("")
 
@@ -19,7 +22,7 @@ function CategoryPageDash (){
         getlist_category()
     },[])
 
-    const server = "http://localhost:8081/api/"
+    const server = "http://127.0.0.1:8081/api/"
     const getlist_category = ()=>{
         axios({
             url: server + "category",
@@ -28,7 +31,7 @@ function CategoryPageDash (){
         }).then(res=>{
             //api respone
             var data = res.data
-            setList(data.list)
+            setList(data.result)
         
 
         }).catch(err =>{
@@ -50,7 +53,7 @@ function CategoryPageDash (){
             var data = res.data
             // setList(data.message)
             //getlist_category()
-            var tmp_data = list.filter((item)=>item.category_id != category_id)
+            var tmp_data = result.filter((item)=>item.category_id != category_id)
             setList(tmp_data)
         
 
@@ -68,7 +71,9 @@ function CategoryPageDash (){
         setItem(null)
     }
     const clearForm = ()=>{
-        setCategoryName("")
+        setNameEn("")
+        setNameKh("")
+        setImage("")
         setDescription("")
         setStatus("")
     }
@@ -85,7 +90,9 @@ function CategoryPageDash (){
     const onSave_Category = ()=>{
         onHideModalFromCreate()
         var param = {
-            "category_name":category_name,
+            "name_en":name_en,
+            "name_kh" : name_kh,
+            "image" : image,
             "description":description,
             "parent_id" : null,
             "status" : status
@@ -117,19 +124,21 @@ function CategoryPageDash (){
 
     const onClick_edit =(item)=>{
         setItem(item)
-        setCategoryName(item.category_name)
+        setNameEn(item.name_en)
+        setNameKh(item.name_kh)
+        setImage(item.image)
         setDescription(item.description)
         setStatus (item.status)
         setShowFormCreate(true)
 
     }
 
-
-
     return (
         <div style={{padding:10}}>
             <div style={{padding:10, display:'flex', justifyContent: 'space-between'}}>
-                <div>Category</div>
+                <div>
+                    <h3>Category</h3>
+                </div>
                 <div>
                     <Button variant='primary' onClick={onShowModalForm}>New</Button>
                 </div>
@@ -149,11 +158,13 @@ function CategoryPageDash (){
                 
             </thead>
                 <tbody>
-                    {list.map((item,index)=>{
+                    {result.map((item,index)=>{
                         return (
                             <tr key={index}>
                                 <td>{index+1}</td>
-                                <td>{item.category_name}</td>
+                                <td>{item.name_en}</td>
+                                <td>{item.name_kh}</td>
+                                <td>{item.image}</td>
                                 <td>{item.description}</td>
                                 <td>{item.status}</td>
                                 <td>{item.create_at}</td>
@@ -161,7 +172,6 @@ function CategoryPageDash (){
                                     <Button onClick ={()=>onClick_edit(item)}variant="outline-success">Edit</Button>{' '}
                                     <Button onClick={()=>onClick_Delete(item)} variant="outline-danger">Delete</Button>
                                 </td>
-
                             </tr>
                         )
                     })}
@@ -198,13 +208,24 @@ function CategoryPageDash (){
                         <Form>
                            
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Category Name</Form.Label>
+                                <Form.Label>Name En</Form.Label>
                                 <Form.Control 
-                                value={category_name} //state Name
+                                value={name_en} //state Name En
                                     type="input" 
-                                    placeholder="name" 
+                                    placeholder="Name En" 
                                     onChange={(event)=>{
-                                        setCategoryName(event.target.value)   //get value from user onchage => set value to name state 
+                                        setNameEn(event.target.value)   //get value from user onchage => set value to name state 
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Name Kh</Form.Label>
+                                <Form.Control 
+                                value={name_kh} //state Name Kh
+                                    type="input" 
+                                    placeholder="Name kh" 
+                                    onChange={(event)=>{
+                                        setNameKh(event.target.value)   //get value from user onchage => set value to name state 
                                     }}
                                 />
                             </Form.Group>
@@ -222,16 +243,29 @@ function CategoryPageDash (){
                                 />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>status</Form.Label>
+                                <Form.Label>Status</Form.Label>
                                 <Form.Control
                                     value={status} 
                                     type="input" 
-                                    placeholder="status" 
+                                    placeholder="Status" 
                                     onChange={(event)=>{
                                         setStatus(event.target.value)
                                     }}
                                 />
                             </Form.Group>
+                            <Form.Group className="mb-3" controlId="formImageUpload">
+                    <Form.Label>Upload Image</Form.Label>
+                    <Form.Control 
+                        type="file" 
+                        // onChange={
+                        //     (event) => handleImageUpload(event)
+
+                        // } // Add your image upload handler here
+                    />
+                    <Form.Text className="text-muted">
+                        Please upload a relevant image for the category.
+                    </Form.Text>
+                </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
@@ -248,3 +282,4 @@ function CategoryPageDash (){
 }
  
 export default CategoryPageDash;
+

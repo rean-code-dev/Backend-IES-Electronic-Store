@@ -19,3 +19,35 @@
 /* .menuItem a:hover{
 
 } */
+
+
+/* Sidebar logo styling */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #001529; /* Matches the dark theme */
+  }
+  
+  .sidebar-logo {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Header customization */
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Content container */
+  .site-content {
+    min-height: 360px;
+  }
+  
