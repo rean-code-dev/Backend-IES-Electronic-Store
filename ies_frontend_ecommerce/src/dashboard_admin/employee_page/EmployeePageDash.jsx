@@ -97,10 +97,7 @@ function EmployeePageDash (){
                                     <Button onClick ={()=>onClick_edit(item)}variant="outline-success">Edit</Button>{' '}
                                     <Button onClick={()=>onClick_Delete(item)} variant="outline-danger">Delete</Button>
                                 </td>
-                                <td>
-                                    <Button onClick ={()=>onClick_edit(item)}variant="outline-success">Edit</Button>{' '}
-                                    <Button onClick={()=>onClick_Delete(item)} variant="outline-danger">Delete</Button>
-                                </td>
+                               
                                
                             </tr>
                         )
