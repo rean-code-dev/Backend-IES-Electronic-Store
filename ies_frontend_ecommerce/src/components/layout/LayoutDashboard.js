@@ -98,7 +98,7 @@ const LayoutDashboard = () => {
         <Menu onSelect={onChangeMenuDash} theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header style={{ padding: '0 10px', background: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        {/* <Header style={{ padding: '0 10px', background: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <Input.Search placeholder='Search' style={{ width: 200 }} />
           </div>
@@ -112,7 +112,7 @@ const LayoutDashboard = () => {
               </Dropdown>
             </Space>
           </div>
-        </Header>
+        </Header> */}
         <Content style={{ margin: '16px 16px' }}>
           <div style={{ padding: 24, background: '#fff', borderRadius: '8px', minHeight: 360 }}>
             <Outlet />
