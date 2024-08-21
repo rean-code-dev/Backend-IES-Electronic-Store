@@ -16,11 +16,15 @@ const Category = require("./src/routes/category.route")
 const Employee = require("./src/routes/employee.route")
 const WishList =  require("./src/routes/wishlist.route")
 const Payment_methode = require("./src/routes/payment_methode.route")
+const Product = require("./src/routes/product.route")
+const Cart = require("./src/routes/cart.route")
 
+Product(app,"/api/product")
 Category(app,"/api/category")
 Employee(app,"/api/employee")
 WishList(app,"/api/wishlist")
 Payment_methode(app,"/api/payment_menthode")
+Cart(app,"/api/cart")
 
 
 
