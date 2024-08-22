@@ -18,6 +18,8 @@ const WishList =  require("./src/routes/wishlist.route")
 const Payment_methode = require("./src/routes/payment_methode.route")
 const Product = require("./src/routes/product.route")
 const Cart = require("./src/routes/cart.route")
+const OrderDetail = require("./src/routes/order_detail.route")
+const Order = require("./src/routes/order.route")
 
 Product(app,"/api/product")
 Category(app,"/api/category")
@@ -25,6 +27,8 @@ Employee(app,"/api/employee")
 WishList(app,"/api/wishlist")
 Payment_methode(app,"/api/payment_menthode")
 Cart(app,"/api/cart")
+Order(app,"/api/order")
+OrderDetail(app,"/api/order_detail")
 
 
 
