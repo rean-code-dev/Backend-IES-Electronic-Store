@@ -10,6 +10,10 @@ const Customer = (app, base_route) =>{
 
 
     app.get(`${base_route})_address`,controller.getList_address)
+    app.get(`${base_route}_address/:id`,controller.listOne_address)
+    app.post(`${base_route}_address`,controller.new_Address)
+    app.put(`${base_route}_address`,controller.update_Address)
+    app.delete(`${base_route}_address/:id`,controller.remove_Address)
 
     
 }
