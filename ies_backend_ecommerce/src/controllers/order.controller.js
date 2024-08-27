@@ -1,16 +1,17 @@
 const db = require("../database")
-const { isEmptyOrNull , invoiceNumber} = require("../utils/service")
+const { isEmptyOrNull, invoiceNumber } = require("../utils/service")
 
-// const generateInvoiceId = async () =>{
-//     var data =await db.query("SELECT Max (order_id) as id FROM order")
-//     return invoiceNumber(data[0].id)
+const generateInvoiceNo = async () => {
+    var data = await db.query("SELECT MAX( order_id ) as id FROM `order`;")
+    return invoiceNumber(data[0].id)
 
-// }
+}
 //=========================== Get All order ============================
 const getAll_order = async (req, res) => {
-    var data = await db.query("SELECT * FROM `order`") 
+    var data = await db.query("SELECT * FROM `order`")
     res.json({
-        result: data
+        result: data,
+        number: await generateInvoiceNo()
     })
 
 }
@@ -47,51 +48,83 @@ const create_order = async (req, res) => {
         db.beginTransaction()
         const {
             customer_id,
-            address_id,
-            payement_methode_id,
+            customer_address_id,
+            payment_methode_id,
         } = req.body
         var order_status_id = 1
         var invoice_no = "12243"
         var message = {}
-        if (isEmptyOrNull(customer_id)) {message.customer_id = "customer_id required!"}
-        if (isEmptyOrNull(address_id)) { message.address_id = "address_id required!" }
-        if (isEmptyOrNull(payement_methode_id)) { message.payement_methode_id = "payement_methode_id required!" }
-        if(Object.keys(message).length > 0){
+        if (isEmptyOrNull(customer_id)) { message.customer_id = "customer_id required!" }
+        if (isEmptyOrNull(customer_address_id)) { message.customer_address_id = "customer_address_id required!" }
+        if (isEmptyOrNull(payment_methode_id)) { message.payment_methode_id = "payment_methode_id required!" }
+        if (Object.keys(message).length > 0) {
             res.json({
                 message: message,
-                error :  true
+                error: true
             })
             return 0;
         }
         //========= find customer address info (client)
-        var address = await db.query("SELECT * FROM customer_address WHERE customer_address_id = ?",[customer_id])
-        if(address?.length > 0){
-            const {firstname,lastname,tel,address_des} = address[0]
+        var address = await db.query("SELECT * FROM customer_address WHERE customer_address_id = ?", [customer_id])
+        if (address?.length > 0) {
+            const { firstname, lastname, tel, address_des } = address[0]
             //=========== find total order => need getcart info from customer 
-            var Cart = await db.query("SELECT c.*, p.price FROM cart c INNER JOIN product p ON (c.product_id = p.product_id) WHERE c.customer_id = ?",[customer_id])
-            //================ find total amount ======= 
-            const order_total = 0
-            Cart.map((item,index)=>{
-                order_total += (item.quantity * item.price)
-            })
-            //============= Innsert data to table order
-            var sqlOrder = "INSERT INTO order (customer_id,payement_methode_id,order_total,comment,firstname,lastname,telelphone,address_des) VALUES (?,?,?,?,?,?,?,?)"
-            var sqlOrderParam = [customer_id,payement_methode_id,order_total,comment,firstname,lastname,tel,address_des]
-            const dataOrder = db.query(sqlOrder,sqlOrderParam)
-            //========= Insert to Order Detail
-            Cart.map( async (item,index)=>{
-                var sqlOrderDetail = db.query("INSERT INTO order_detail (order_id,product_id,quantity,price) VALUES (?,?,?,?)")
-                var sqlOrderDetailParam = [dataOrder.insertId,item,product_id,item.quantity,item.price]
-                const OrderDetail = await db.query( sqlOrderDetail,sqlOrderDetailParam)
-            })
+            var product = await db.query("SELECT c.*, p.price FROM cart c INNER JOIN product p ON (c.product_id = p.product_id) WHERE c.customer_id = ?", [customer_id])
+            //=========== product no 0 ======= if bigger than 0 go insert ====
+            if (product.length > 0) {
+                //================ find total amount ======= 
+                const order_total = 0
+                product.map((item, index) => {
+                    order_total += (item.quantity * item.price)
+                })
+                //============= Innsert data to table order
+                var order_status_id = 1 // Padding
+                var inv_no = await generateInvoiceNo();
+                var sqlOrder = "INSERT INTO `order`" +
+                    " (customer_id,order_status_id,payment_methode_id,invoice_no,order_total,comment,firstname,lastname,telelphone,address_des) VALUES" +
+                    " (?,?,?,?,?,?,?,?,?,?)"
+                var sqlOrderParam = [customer_id, order_status_id, payment_methode_id, inv_no, order_total, comment, firstname, lastname, tel, address_des]
+                const dataOrder = db.query(sqlOrder, sqlOrderParam)
+                //========= Insert to Order Detail
+                product.map(async (item, index) => {
+                    var sqlOrderDetail = db.query("INSERT INTO order_detail (order_id,product_id,quantity,price) VALUES (?,?,?,?)")
+                    var sqlOrderDetailParam = [dataOrder.insertId, item.product_id, item.quantity, item.price];
+                    const OrderDetail = await db.query(sqlOrderDetail, sqlOrderDetailParam)
+
+                    ///=============== Cut stock from  order product ==========
+                    var sqlProduct = "UPDATE product SET quantity = (quantity-?) WHERE product_id = ?"
+                    var updatePro = await db.query(sqlProduct, [item.quantity])
+                })
+
+                ///============ Clear cart by customer ==============
+                await db.query("DELETE FROM cart WHERE customer_id = ?", [customer_id, item.product_id])
+
+                res.json({
+                    message: "Order have been Succcessfully!",
+                    result: dataOrder
+                })
+                db.commit()
+
+            }else{
+                res.json({
+                    message: "Your cart is empty!",
+                    error: true
+                })
+            }
+
+
+        }else {
             res.json({
-                message : "Order have been complete!",
-                result : dataOrder
+                message: "Please Select Address!",
+                error: true
             })
         }
     } catch (e) {
-
         db.rollback();
+        res.json({
+            message: e,
+            error: true
+        })
     }
 }
 
@@ -105,7 +138,7 @@ const remove_order = (req, res) => {
 
 }
 module.exports = {
-   // generateUnvoiceId,
+    // generateUnvoiceId,
     getAll_order,
     getOne_order,
     getOrderByCustomer,

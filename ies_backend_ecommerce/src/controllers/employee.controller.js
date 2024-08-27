@@ -16,12 +16,19 @@ const storage = multer.diskStorage({
 // Initialize multer
 const upload = multer({ storage: storage });
 
+
+
+
 //================ Get Employee =========
 const getAll_employee =async(req,res)=>{
     var result = await db.query('SELECT * FROM employee')
     res.json({
         result : result
     })
+
+}
+
+const getOne_employee = async(req,res) =>{
 
 }
 
@@ -171,6 +178,7 @@ const getAll_employee =async(req,res)=>{
 
 module.exports ={
     getAll_employee,
+    getOne_employee,
     create_employee,
     // update_employee,
      remove_employee
