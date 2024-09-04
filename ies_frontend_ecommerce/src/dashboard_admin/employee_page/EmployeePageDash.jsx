@@ -19,6 +19,7 @@ function EmployeePageDash() {
     const [image, setImage] = useState(null);
     const [dob, setDob] = useState("")
     const [phone, setPhone] = useState("")
+    const [password,setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [base_salary, setBaseSalary] = useState("")
     const [address, setAddress] = useState("")
@@ -64,6 +65,7 @@ function EmployeePageDash() {
             "image" : image,
             "dob" : dob,
             "phone":phone,
+            "password" : password,
             "email" : email,
             "base_salary" : base_salary,
             "address":address,
@@ -146,6 +148,7 @@ function EmployeePageDash() {
         setImage("")
         setDob("")
         setPhone("")
+        setPassword("")
         setEmail("")
         setBaseSalary("")
         setAddress("")
@@ -187,6 +190,7 @@ function EmployeePageDash() {
                         <th>IMAGE</th>
                         <th>DATE OF BIRTH</th>
                         <th>PHONE</th>
+                        <th>PASSWORD</th>
                         <th>EMAIL</th>
                         <th>SALARY ($)</th>
                         <th>ADDRESS</th>
@@ -210,6 +214,7 @@ function EmployeePageDash() {
                                 <td>{item.image}</td>
                                 <td>{item.dob}</td>
                                 <td>{item.phone}</td>
+                                <td>{item.password}</td>
                                 <td>{item.email}</td>
                                 <td>{item.base_salary}</td>
                                 <td>{item.address}</td>

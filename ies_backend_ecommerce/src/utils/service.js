@@ -1,5 +1,6 @@
 
 exports.KEY_TOKEN = "SDFAFas343@@$#@%%^124312$^@@!21()RTYERY4565641251Gre5%^$%$%$#52tifghu"
+
 exports.isEmptyOrNull = (value)=>{
     if(value == "" || value == null || value == undefined){
         return true

@@ -114,6 +114,7 @@ CREATE TABLE `employee` (
   `image` varchar(255) DEFAULT NULL,
   `dob` varchar(120) DEFAULT NULL,
   `phone` varchar(16) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `email` varchar(120) DEFAULT NULL,
   `base_salary` decimal(5,0) DEFAULT NULL,
   `address` text DEFAULT NULL,
