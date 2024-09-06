@@ -187,19 +187,7 @@ const remove_customer = (req, res) => {
     })
 
 }
-///======================= get role by customer ============
-const getPermissionByCustomer = async (customer_id) => {
-    var sql = "SELECT" +
-        " p.code" +
-        " FROM customer c" +
-        " INNER JOIN role r ON c.role_id = r.role_id" +
-        " INNER JOIN role_permission rp ON r.role_id = rp.role_id" +
-        " INNER JOIN permission p ON rp.permission_id = p.permission_id" +
-        " WHERE c.customer_id = ?"
-    var result = await db.query(sql,[customer_id])
-    return result;
 
-}
 ///====================== Login =====================
 const login = async (req, res) => {
     var { username, password } = req.body;
@@ -224,10 +212,10 @@ const login = async (req, res) => {
         if (incorrect) {
             var user = user[0]
             delete user.password ///  delete column password from user
-            var permission = await getPermissionByCustomer(user.customer_id)
+            
             var obj = {
                 user: user,
-                permission: permission,
+                permission: [],
                 token: ""  //generate token JWT
             }
 

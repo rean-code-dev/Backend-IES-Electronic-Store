@@ -20,6 +20,8 @@ const Product = require("./src/routes/product.route")
 const Cart = require("./src/routes/cart.route")
 const OrderDetail = require("./src/routes/order_detail.route")
 const Order = require("./src/routes/order.route")
+const Slider = require("./src/routes/carousel_slider.route")
+
 
 Product(app,"/api/product")
 Category(app,"/api/category")
@@ -28,6 +30,7 @@ WishList(app,"/api/wishlist")
 Payment_methode(app,"/api/payment_menthode")
 Cart(app,"/api/cart")
 Order(app,"/api/order")
+Slider(app,"/api/slider")
 OrderDetail(app,"/api/order_detail")
 
 
