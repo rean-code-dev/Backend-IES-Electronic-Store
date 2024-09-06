@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Table, Button, Modal, Form } from "react-bootstrap"
 import { FileInput, Label } from "flowbite-react";
+import { request } from '../share/request';
 function CategoryPageDash() {
 
 
@@ -25,11 +26,21 @@ function CategoryPageDash() {
 
     const server = "http://127.0.0.1:8081/api/"
     const getlist_category = () => {
-        axios({
-            url: server + "category",
-            method: 'get',
+        // axios({
+        //     url: server + "category",
+        //     method: 'get',
 
-        }).then(res => {
+        // }).then(res => {
+        //     //api respone
+        //     var data = res.data
+        //     setList(data.result)
+
+
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+
+        request("category","get").then(res => {
             //api respone
             var data = res.data
             setList(data.result)

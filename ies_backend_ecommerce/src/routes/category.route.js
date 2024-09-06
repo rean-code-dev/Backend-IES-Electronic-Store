@@ -1,3 +1,4 @@
+const { userGuard } = require("../controllers/auth.controller")
 const controller =  require("../controllers/category.controller")
 
 const Category = (app,base_route) =>{
