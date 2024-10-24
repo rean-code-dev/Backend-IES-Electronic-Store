@@ -57,12 +57,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name_en`, `name_kh`, `image`, `description`, `parent_id`, `status`, `create_at`) VALUES
-(22, 'Arduino Uno', 'Arduino', '', 'Arduino UNO is a microcontroller board based on the ATmega328P.', NULL, 1, '2024-08-13 03:02:56'),
-(23, 'Wire', 'ខ្សែរ', '', 'The Wire library uses 7 bit addresses throughout. ', NULL, 1, '2024-08-13 07:47:48'),
-(33, 'koko', 'bnmbn', '', 'The Wire library uses 7 bit addresses throughout. ', NULL, 1, '2024-08-15 10:20:41'),
-(34, 'ppppp', 'pppp', '', 'pppp', NULL, 0, '2024-08-16 04:50:17'),
-(35, 'ooooo', 'ooooo', '', 'ouijkhhn,mbnm,', NULL, 0, '2024-08-16 06:37:16'),
-(36, 'lololo', 'lolololo', '', 'drftghcvnbf', NULL, 0, '2024-08-16 07:01:06');
+(1, 'Arduino Uno', 'Arduino', '', 'Arduino UNO is a microcontroller board based on the ATmega328P.', NULL, 1, '2024-08-13 03:02:56'),
+(2, 'Wire', 'ខ្សែរ', '', 'The Wire library uses 7 bit addresses throughout. ', NULL, 1, '2024-08-13 07:47:48'),
+(3, 'koko', 'bnmbn', '', 'The Wire library uses 7 bit addresses throughout. ', NULL, 1, '2024-08-15 10:20:41'),
+(4, 'ppppp', 'pppp', '', 'pppp', NULL, 0, '2024-08-16 04:50:17'),
+(5, 'ooooo', 'ooooo', '', 'ouijkhhn,mbnm,', NULL, 0, '2024-08-16 06:37:16'),
+(6, 'lololo', 'lolololo', '', 'drftghcvnbf', NULL, 0, '2024-08-16 07:01:06');
 
 -- --------------------------------------------------------
 
@@ -129,8 +129,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `firstname`, `lastname`, `gender`, `position`, `image`, `dob`, `phone`, `email`, `base_salary`, `address`, `province`, `country`, `status`, `create_at`) VALUES
-(11, 'Mr', 'Dara', 'Male', 'Cashier', '', '11/jun/1997', '0968899887', 'dara@gmail.com', 1000, '#23 123st PP...', 'PP', 'Cambodia', 1, '2024-08-16 09:11:57'),
-(12, 'Mr', 'mey mey', 'female', 'Cashier', '', '01/Dec/2000', '0968899887', 'dara@gmail.com', 1000, '#23 123st PP...', 'PP', 'Cambodia', 1, '2024-08-16 09:11:57');
+(1, 'Mr', 'Dara', 'Male', 'Cashier', '', '11/jun/1997', '0968899887', 'dara@gmail.com', 1000, '#23 123st PP...', 'PP', 'Cambodia', 1, '2024-08-16 09:11:57'),
+(2, 'Mr', 'mey mey', 'female', 'Cashier', '', '01/Dec/2000', '0968899887', 'dara@gmail.com', 1000, '#23 123st PP...', 'PP', 'Cambodia', 1, '2024-08-16 09:11:57');
 
 -- --------------------------------------------------------
 
