@@ -78,20 +78,13 @@ exports.userGuard = (req, res, next) => { ///get access token from client
 
 ///======================= get role User ===========
 exports.getPermissionUser = async (id) => {
-    // var sql = "SELECT"+
-    //     " p.code"+
-    //     " FROM employee c" +
-    //     " INNER JOIN role r ON c.role_id = r.role_id" +
-    //     " INNER JOIN role_permission rp ON r.role_id = rp.role_id" +
-    //     " INNER JOIN permission p ON rp.permission_id = p.permission_id" +
-    //     " WHERE c.employee_id = ?"
-
-    var sql = "SELECT p.code" +
-        " From employee e"+
-        " INNER JOIN `role` r ON e.role_id = r.role_id"+
-        " INNER JOIN role_permission rp ON r.role_id = rp.role_id"+
-        " INNER JOIN permission p ON rp.permission_id = p.permission_id"+
-        " WHERE e.employee_id = ?";
+   
+    var sql = "SELECT p.code"+ 
+            " FROM employee e"+
+            " INNER JOIN `role` r ON e.employee_id = r.role_id"+
+            " INNER JOIN role_permission rp ON r.role_id  = rp.permission_id"+
+            " INNER JOIN permission p ON p.permission_id = rp.permission_id "+
+            " WHERE e.employee_id = ?"
 
     var result = await db.query(sql, [id])
     var tempArr = [];
