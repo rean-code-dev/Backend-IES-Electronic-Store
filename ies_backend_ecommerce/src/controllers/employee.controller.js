@@ -1,5 +1,5 @@
 const db = require("../database")
-const { isEmptyOrNull, KEY_TOKEN } = require("../utils/service")
+const { isEmptyOrNull, KEY_TOKEN, REFRESH_TOKEN, KEY_REFRESH_TOKEN } = require("../utils/service")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const multer = require('multer');
@@ -118,6 +118,32 @@ const create_employee = (req, res) => {
     })
 }
 
+const refreshToken = async (req,res) =>{
+
+    //check and verify resfresh token fro client
+    var {refresh_key} = req.body;
+    if(isEmptyOrNull(refresh_key)){
+        res.status(401).send({
+            message: "Unauthorized",
+
+        });
+    }else{
+        jwt.verify(refresh_key,KEY_REFRESH_TOKEN,(error,result)=>{
+            if(error){
+                res.status(401).send({
+                    message: "Unauthorized",
+                    error: error
+                });
+            }else{
+                //សុំសិទ្ធទាញយក Token ថ្មី
+                res.json({
+                    data_after_refresh: result
+                })
+            }
+        })
+    }
+
+}
 
 ///====================== Login Employee =====================
 const login = async (req, res) => {
@@ -150,7 +176,7 @@ const login = async (req, res) => {
                 permission: permission,
             }
             var access_token = jwt.sign({ data: { ...obj } }, KEY_TOKEN,{expiresIn: "24h"})
-            var refresh_token = jwt.sign({data:{...obj}},KEY_TOKEN)
+            var refresh_token = jwt.sign({data:{...obj}},KEY_REFRESH_TOKEN)
            
             res.json({
                 ...obj,
@@ -173,8 +199,6 @@ const login = async (req, res) => {
 
 
 }
-
-
 
 
 const setPassword = async (req, res) => {
@@ -299,5 +323,6 @@ module.exports = {
     update_employee,
     remove_employee,
     login,
-    setPassword
+    setPassword,
+    refreshToken
 }

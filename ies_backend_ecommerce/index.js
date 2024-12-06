@@ -7,10 +7,6 @@ app.use(cors({
     origin: "*"
 }))
 app.use(express.json())
-app.get("/",(req,res)=>{res.send("Hello kon papa")})
-
-
-
 
 const Category = require("./src/routes/category.route")
 const Employee = require("./src/routes/employee.route")
