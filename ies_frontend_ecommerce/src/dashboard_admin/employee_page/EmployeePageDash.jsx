@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Table, Button, Modal, Form } from "react-bootstrap"
-import { SnackbarProvider, useSnackbar } from 'notistack';
+// import { SnackbarProvider, useSnackbar } from 'notistack';
 import "../../server/server_route"
 function EmployeePageDash() {
-    const { enqueueSnackbar } = useSnackbar(); // Initialize notistack
+   // const { enqueueSnackbar } = useSnackbar(); // Initialize notistack
     const [result, setList] = useState([])
     const [item, setItem] = useState({})
     const [show,setShow] = useState(false)
@@ -92,13 +92,13 @@ function EmployeePageDash() {
             //     getlist_employee();
              
             // }
-            if (res) {
-                enqueueSnackbar('Employee saved successfully!', { variant: 'success' });
-                getlist_employee(); // Update your employee list
-              }
-            })
-            .catch((error) => {
-              enqueueSnackbar('Failed to save employee.', { variant: 'error' });
+            // if (res) {
+            //     enqueueSnackbar('Employee saved successfully!', { variant: 'success' });
+            //     getlist_employee(); // Update your employee list
+            //   }
+            // })
+            // .catch((error) => {
+            //   enqueueSnackbar('Failed to save employee.', { variant: 'error' });
             
         })
     }
