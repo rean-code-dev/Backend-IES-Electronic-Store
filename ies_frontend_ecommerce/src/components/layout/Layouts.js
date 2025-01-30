@@ -1,10 +1,14 @@
 
-import { Col, Row, Space } from "antd"
-import "./layout.css"
+import React from "react";
+import "../layout/Layout.css"
 import {Outlet, useNavigate} from "react-router-dom"
-import logo from '../../assets/image/lock.png'
-import {BsTelegram} from 'react-icons/bs'
-import { FaFacebook } from "react-icons/fa";
+import Banner from "../banner/Banner"
+import Footer from "../footer/Footer"
+import BannerSlider from "../banner_slider/BannerSlider"
+import Navbar from "../navbar/NavBar";
+import TopProducts from "../top_product/TopProduct";
+import AOS from "aos";
+
 
 function Layout({}){
 
@@ -15,13 +19,23 @@ function Layout({}){
         navigate(routeName)
 
     }
-
+    React.useEffect(() => {
+        AOS.init({
+          offset: 100,
+          duration: 800,
+          easing: "ease-in-sine",
+          delay: 100,
+        });
+        AOS.refresh();
+      }, []);
     return (
-        <div>
-            <div className="mainHeader">
+        
+       
+            <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
+            {/* <div className="mainHeader">
                 <div>
                     <img src="" style={{width: 60}}></img>
-                    <h1>Education</h1>
+                    <h1>Creattive Innovation Center</h1>
                 </div>
                 <div className="menuContain">
                     <ul className="menu">
@@ -34,12 +48,19 @@ function Layout({}){
                     </ul>
                 </div>
                
-            </div>
-            <Outlet/>   
-            <div style={{marginTop: 20, backgroundColor: '#FFE4C4', padding:'50px 10%'}}>
+            </div> */}
+
+            <Navbar/>
+            {/* <BannerSlider /> */}
+            <Outlet/> 
+            <Banner />  
+            <TopProducts/>
+            <Footer />
+    
+            {/* <div style={{marginTop: 20, backgroundColor: '#FFE4C4', padding:'50px 10%'}}>
                 <Row>
                     <Col xs={{span:24}} md={{span:8}}>
-                        <img src={logo} 
+                        <img src={logo_page} 
                         width={140} 
                         height={130}
                         />
@@ -60,12 +81,12 @@ function Layout({}){
                          <BsTelegram /><div className="textNomal">Telegram</div>
                         </Space></a>
 
-                        
+            
                         
                     </Col>
                 </Row>
 
-            </div>
+            </div> */}
         </div>
         
     )

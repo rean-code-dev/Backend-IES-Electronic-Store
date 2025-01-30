@@ -1,19 +1,18 @@
 .mainHeader{
-    background-color: green;
+    background-color: red;
     padding: 10px;
     display: flex;
+    color: white;
     justify-content: space-between;
 }
 
 .menu{
     list-style-type: none;
     cursor: pointer;
+    font-weight: bold;
     display: flex;
 }
 .menuItem {
     padding: 10px;
     text-decoration: none;
 }
-/* .menuItem a:hover{
-
-} */
