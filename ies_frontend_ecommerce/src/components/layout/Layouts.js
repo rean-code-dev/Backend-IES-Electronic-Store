@@ -4,10 +4,10 @@ import "../layout/Layout.css"
 import {Outlet, useNavigate} from "react-router-dom"
 import Banner from "../banner/Banner"
 import Footer from "../footer/Footer"
-import BannerSlider from "../banner_slider/BannerSlider"
+// import BannerSlider from "../banner_slider/BannerSlider"
 import Navbar from "../navbar/NavBar";
 import TopProducts from "../top_product/TopProduct";
-import AOS from "aos";
+// import AOS from "aos";
 
 
 function Layout({}){
@@ -19,15 +19,15 @@ function Layout({}){
         navigate(routeName)
 
     }
-    React.useEffect(() => {
-        AOS.init({
-          offset: 100,
-          duration: 800,
-          easing: "ease-in-sine",
-          delay: 100,
-        });
-        AOS.refresh();
-      }, []);
+    // React.useEffect(() => {
+    //     AOS.init({
+    //       offset: 100,
+    //       duration: 800,
+    //       easing: "ease-in-sine",
+    //       delay: 100,
+    //     });
+    //     AOS.refresh();
+    //   }, []);
     return (
         
        
