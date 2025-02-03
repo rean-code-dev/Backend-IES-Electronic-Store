@@ -15,24 +15,13 @@ function Layout({}){
     const navigate = useNavigate()
 
     const onClickMenu= (routeName)=>{
-        //alert(routeName)
+       
         navigate(routeName)
 
     }
-    // React.useEffect(() => {
-    //     AOS.init({
-    //       offset: 100,
-    //       duration: 800,
-    //       easing: "ease-in-sine",
-    //       delay: 100,
-    //     });
-    //     AOS.refresh();
-    //   }, []);
     return (
-        
-       
             <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
-            {/* <div className="mainHeader">
+            <div className="mainHeader">
                 <div>
                     <img src="" style={{width: 60}}></img>
                     <h1>Creattive Innovation Center</h1>
@@ -48,15 +37,12 @@ function Layout({}){
                     </ul>
                 </div>
                
-            </div> */}
+            </div>
 
-            <Navbar/>
-            {/* <BannerSlider /> */}
-            <Outlet/> 
-            <Banner />  
-            <TopProducts/>
-            <Footer />
+            {/* <Navbar/> */}
     
+            <Outlet/> 
+        
             {/* <div style={{marginTop: 20, backgroundColor: '#FFE4C4', padding:'50px 10%'}}>
                 <Row>
                     <Col xs={{span:24}} md={{span:8}}>
@@ -81,8 +67,6 @@ function Layout({}){
                          <BsTelegram /><div className="textNomal">Telegram</div>
                         </Space></a>
 
-            
-                        
                     </Col>
                 </Row>
 
