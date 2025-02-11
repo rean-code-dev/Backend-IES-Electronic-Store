@@ -14,8 +14,6 @@ import Layouts from './components/layout/Layouts';
 
 function App() {
   return (
-   
-    
     <BrowserRouter> 
     <Routes>
      {/* Backend */}
