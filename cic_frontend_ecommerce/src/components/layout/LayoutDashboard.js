@@ -21,19 +21,35 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Dashboard', '/dashboard', <PieChartOutlined />),
+  //getItem('Dashboard', '/dashboard', <PieChartOutlined />),
   getItem('Product', '/dashboard/product', <DesktopOutlined />),
   getItem('Category', '/dashboard/category', <DesktopOutlined />),
   getItem('Sale', '/dashboard/sale', <DesktopOutlined />),
-  getItem('Invoice', '/dashboard/invoice', <DesktopOutlined />),
+ // getItem('Invoice', '/dashboard/invoice', <DesktopOutlined />),
+
+ 
+  getItem('Promotion', 'sub2', <TeamOutlined />, [
+    getItem('Promotion List', 'promotion_list'),
+    getItem('Mobile Banner', 'mobile_banner'),
+    getItem('Website Banner', 'website_banner'),
+  ]),
+  getItem('Customer Profile', '/dashboard/customer', <DesktopOutlined />),
+  getItem('Customer Feedback', '/dashboard/feedback', <DesktopOutlined />),
+  getItem('Users', 'sub2', <TeamOutlined />, [
+    getItem('Customer', 'customer'),
+    getItem('Employee', 'employee'),
+    getItem('Users List', 'users_list'),
+    getItem('User Role Management', 'user_role_management'),
+    getItem('User Requesting', 'user_requesting'),
+  ]),
   getItem('Report', 'sub1', <UserOutlined />, [
     getItem('Sale Report', '3'),
     getItem('Transaction Report', '4'),
     getItem('Product Report', '5'),
   ]),
-  getItem('People', 'sub2', <TeamOutlined />, [
-    getItem('Customer', 'customer'),
-    getItem('Employee', 'employee'),
+  getItem('Setting', 'sub3', <TeamOutlined />, [
+    getItem('Payment Methods', 'payment_methods'),
+  
   ]),
   getItem('Logout', 'logout', <FileOutlined />),
 ];
@@ -88,7 +104,7 @@ const LayoutDashboard = () => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',paddingTop:0.4,paddingLeft:0.4,paddingRight: 0.515 }}>
+        <div style={{ display: 'flex', background: "red", justifyContent: 'center', alignItems: 'center',paddingTop:0.4,paddingLeft:0.4,paddingRight: 0.515 }}>
         <img 
             src={'https://cdn2.f-cdn.com/contestentries/392089/3249793/57192d913e1c7_thumb900.jpg'} 
             alt="Logo" 
@@ -98,7 +114,7 @@ const LayoutDashboard = () => {
         <Menu onSelect={onChangeMenuDash} theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header style={{ padding: '0 10px', background: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Header style={{ padding: '0 10px', background: "red", display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <Input.Search placeholder='Search' style={{ width: 200 }} />
           </div>
@@ -119,7 +135,7 @@ const LayoutDashboard = () => {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          IES Electronic Store ©{new Date().getFullYear()} Created by Rean Code
+          Creative Of Storedfsgdgsdgsdgsdgdsgsdgdsg ©{new Date().getFullYear()} Created by Rean Code
         </Footer>
       </Layout>
     </Layout>

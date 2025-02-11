@@ -1,7 +1,7 @@
 import React from "react";
-import Img1 from '../../components/assets/images/logo_page.png'
-import Img2 from '../../components/assets/images/logo_page.png'
-import Img3 from '../../components/assets/images/logo_page.png'
+import Img1 from '../assets/images/logo_page.png'
+import Img2 from '../assets/images/logo_page.png'
+import Img3 from '../assets/images/logo_page.png'
 import { FaStar } from "react-icons/fa";
 
 const ProductsData = [
@@ -63,7 +63,7 @@ const TopProducts = ({ handleOrderPopup }) => {
           {ProductsData.map((data) => (
             <div
               data-aos="zoom-in"
-              className="rounded-2xl bg-bg-black/80 dark:bg-gray-800 hover:bg-black/80 dark:hover:bg-primary hover:text-white relative shadow-xl duration-300 group max-w-[300p]"
+              className="rounded-2xl bg-bg-black/80 dark:bg-gray-800 hover:bg-black/80 dark:hover:bg-primary hover:text-white relative shadow-xl duration-300 group max-w-[300px]"
             >
               {/* image section */}
               <div className="h-[100px]">
