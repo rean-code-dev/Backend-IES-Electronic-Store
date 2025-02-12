@@ -1,5 +1,6 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductPageDash from './dashboard_admin/product_page/ProductPageDash';
 import CategoryPageDash from './dashboard_admin/category_page/CategoryPageDash';
 import HomePageView from './fontend_view_page/home_page_view/HomePageView';
 import AboutPageView from './fontend_view_page/about_page_view/AboutPageView';
@@ -25,6 +26,7 @@ function App() {
       {/* Backend dashboard*/}
         <Route path="/dashboard" element ={<LayoutDashboard/>}>
           <Route path="" element={<HomePageDash/>} />
+          <Route path="product" element={<ProductPageDash/>} />
           <Route path="category" element={<CategoryPageDash/>} />
           <Route path="employee" element={<EmployeePageDash/>} />
           <Route path="customer" element={<CustomerPageDash/>} />
