@@ -24,7 +24,7 @@ function getItem(label, key, icon, children) {
 const items = [
   //getItem('Dashboard', '/dashboard', <PieChartOutlined />),
   getItem('Product', '/dashboard/product', <DesktopOutlined />),
-  getItem('Category', 'sub2', <TeamOutlined />, [
+  getItem('Category', 'sub1', <TeamOutlined />, [
     getItem('Category List', '/dashboard/category'),
 
   ]),

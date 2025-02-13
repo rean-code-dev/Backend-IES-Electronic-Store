@@ -43,11 +43,17 @@ exports.upload = multer({
     },
     fileFilter:(req, file, cb) => {
          console.log(file)
-        if (file.mimetype !== "image/png" || file.mimetype !== "image/jpg" || file.mimetype !== "image/jpeg") {
+        // if (file.mimetype !== "image/png" || file.mimetype !== "image/jpg" || file.mimetype !== "image/jpeg") {
+        //     cb(null, false);
+        // } else {
+        //     cb(null, true);
+        // }
+        if (!["image/png", "image/jpg", "image/jpeg"].includes(file.mimetype)) {
             cb(null, false);
         } else {
             cb(null, true);
         }
+        
     }
 
 })

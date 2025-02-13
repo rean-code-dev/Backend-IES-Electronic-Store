@@ -158,7 +158,7 @@ const update_product = async (req, res) => {
 ///========================  remove Product =================
 const remove_product = async (req, res) => {
     const { product_id } = req.body
-    var sql = 'DELETE * FROM product WHERE product_id = ?'
+    var sql = 'DELETE * FROM product WHERE product_id = 1?'
     var result = await db.query(sql, [product_id])
 
     res.json({
@@ -166,6 +166,7 @@ const remove_product = async (req, res) => {
         result: result
     })
 }
+
 
 
 ///======================== changeProductStatus =================

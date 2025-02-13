@@ -33,7 +33,6 @@ const create_category  = (req,res) =>{
     const {
         name_en,
         name_kh,
-        image,
         description,
         parent_id,
         status,
@@ -41,6 +40,7 @@ const create_category  = (req,res) =>{
     }=req.body
 
     var message = {}
+    var fileName = null
     if(isEmptyOrNull(name_en)){
         message.name_en = "name_en required!"
     }
@@ -53,14 +53,17 @@ const create_category  = (req,res) =>{
             message : message
         })
         return
-    } 
-
+    }
+    if(req.file){ //check true upload file from frontend
+        fileName = req.file.filename ///get file name
+    }
+   
     var sql  = 'INSERT INTO category ( `name_en`, `name_kh`, `image`, `description`, `parent_id`, `status`) VALUES(?,?,?,?,?,?)'
     
     var param_data = [
         name_en,
         name_kh,
-        image,
+        fileName,
         description,
         parent_id,
         status
