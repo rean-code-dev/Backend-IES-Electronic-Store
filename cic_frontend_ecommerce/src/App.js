@@ -2,6 +2,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductPageDash from './dashboard_admin/product_page/ProductPageDash';
 import CategoryPageDash from './dashboard_admin/category_page/CategoryPageDash';
+import PromotionPageDash from './dashboard_admin/promotion_page/PromotionPageDash';
 import HomePageView from './fontend_view_page/home_page_view/HomePageView';
 import AboutPageView from './fontend_view_page/about_page_view/AboutPageView';
 import HomePageDash from './dashboard_admin/home_page/HomePageDash';
@@ -28,6 +29,7 @@ function App() {
           <Route path="" element={<HomePageDash/>} />
           <Route path="product" element={<ProductPageDash/>} />
           <Route path="category" element={<CategoryPageDash/>} />
+          <Route path="promotion_list" element={<PromotionPageDash/>} />
           <Route path="employee" element={<EmployeePageDash/>} />
           <Route path="customer" element={<CustomerPageDash/>} />
           <Route path="*" element={<RouteNoteFound/>} />

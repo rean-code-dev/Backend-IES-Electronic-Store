@@ -55,6 +55,7 @@ const create_product = (req, res) => {
         category_id,
         barcode,
         name,
+        nameKh,
         quantity,
         price,
         image,
@@ -90,8 +91,8 @@ const create_product = (req, res) => {
         return false;
     }
  
-    var sql = "INSERT INTO product (category_id,barcode,name,quantity,price,image,description) VALUES (?,?,?,?,?,?,?)"
-    var param = [category_id, barcode, name, quantity, price, filename, description]
+    var sql = "INSERT INTO product (category_id,barcode,name,nameKh,quantity,price,image,description) VALUES (?,?,?,?,?,?,?,?)"
+    var param = [category_id, barcode, name,nameKh, quantity, price, filename, description]
     var result = db.query(sql, param)
     res.json({
         message: "Create product Success!",
@@ -109,6 +110,7 @@ const update_product = async (req, res) => {
         category_id,
         barcode,
         name,
+        nameKh,
         quantity,
         price,
         image,
@@ -143,8 +145,8 @@ const update_product = async (req, res) => {
         return false;
     }
 
-    var sql = "UPDATE product SET category_id =? ,barcode=?,name =? ,quantity =? ,price =?,image=?,description =? WHERE product_id =?"
-    var param = [category_id, barcode, name, quantity, price, image, description, product_id]
+    var sql = "UPDATE product SET category_id =? ,barcode=?,name =? ,nameKh =?,quantity =? ,price =?,image=?,description =? WHERE product_id =?"
+    var param = [category_id, barcode, name, nameKh, quantity, price, image, description, product_id]
     var result = db.query(sql, param)
     res.json({
         message: "Update product Success!",
