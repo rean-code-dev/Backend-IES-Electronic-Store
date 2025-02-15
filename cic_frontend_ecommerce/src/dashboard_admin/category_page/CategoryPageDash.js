@@ -2,8 +2,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Table, Button, Modal, Form } from "react-bootstrap"
-import { FileInput, Label } from "flowbite-react";
 import { request } from '../share/request';
+import baseUrl from '../../server/server_route'
+import  ImagePath  from '../../server/image_path';
 function CategoryPageDash() {
 
 
@@ -24,10 +25,10 @@ function CategoryPageDash() {
         getlist_category()
     }, [])
 
-    const server = "http://127.0.0.1:8081/api/"
+    
     const getlist_category = () => {
         axios({
-            url: server + "category",
+            url: baseUrl + "category",
             method: 'get',
 
         }).then(res => {
@@ -57,7 +58,7 @@ function CategoryPageDash() {
         var category_id = item.category_id
 
         axios({
-            url: server + "category/" + category_id,
+            url: baseUrl + "category/" + category_id,
             method: 'delete',
 
         }).then(res => {
@@ -134,7 +135,7 @@ function CategoryPageDash() {
             "status": status
         }
 
-        var url = server + "category"
+        var url = baseUrl + "category"
         var method = 'post'
         //Case update
         if (item.category_id != null) {
@@ -202,7 +203,7 @@ function CategoryPageDash() {
                                 <td>{item.name_kh}</td>
                                 <td>
                                     <img 
-                                        src={`http://localhost:80/project/image_cic/${item.image}`} 
+                                        src={`${ImagePath}/${item.image}`} 
                                         alt="Uploaded" 
                                         width="50" 
                                         height="50"

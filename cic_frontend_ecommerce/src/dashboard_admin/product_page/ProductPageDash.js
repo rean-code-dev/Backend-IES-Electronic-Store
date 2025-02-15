@@ -4,6 +4,7 @@ import { Table, Button, Modal, Form } from 'react-bootstrap';
 
 
 import baseUrl from '../../server/server_route'
+import  ImagePath  from '../../server/image_path';
 
 function ProductPageDash() {
     const [result, setList] = useState([]);
@@ -114,7 +115,15 @@ function ProductPageDash() {
                             <td>{item.nameKh}</td>
                             <td>{item.quantity}</td>
                             <td>{item.price}</td>
-                            <td>{item.image}</td>
+                            <td>
+                                    <img 
+                                        src={`${ImagePath}/${item.image}`} 
+                                        alt="Uploaded" 
+                                        width="50" 
+                                        height="50"
+                                        style={{ objectFit: 'cover', borderRadius: '5px' }}
+                                    />
+                                </td>
                             {/* <td>{item.description}</td> */}
                             <td>{item.expiration_date}</td>
                             <td>{item.is_active}</td>

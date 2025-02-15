@@ -40,8 +40,6 @@ const items = [
   getItem('Customer Profile', '/dashboard/customer', <DesktopOutlined />),
   getItem('Customer Feedback', '/dashboard/feedback', <DesktopOutlined />),
   getItem('Users', 'sub2', <TeamOutlined />, [
-    // getItem('Customer', 'customer'),
-    // getItem('Employee', 'employee'),
     getItem('Users List', 'employee'),
     getItem('User Role Management', 'user_role_management'),
     getItem('User Requesting', 'user_requesting'),
@@ -110,7 +108,7 @@ const LayoutDashboard = () => {
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div style={{ display: 'flex', background: "red", justifyContent: 'center', alignItems: 'center',paddingTop:0.4,paddingLeft:0.4,paddingRight: 0.515 }}>
         <img 
-            src={LogoPageImg} 
+            // src={LogoPageImg} 
             alt="Logo" 
             style={{ maxWidth: '100%', height: 'auto' }}
           />

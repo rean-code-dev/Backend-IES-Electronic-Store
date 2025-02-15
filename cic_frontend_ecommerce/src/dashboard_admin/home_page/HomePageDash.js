@@ -54,7 +54,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <p className="text-gray-500">Hi, uat01. Welcome back to Red Ant Express Admin!</p>
+      <p className="text-gray-500">Hi, Sophun. Welcome back to Creative Innovation Center Admin!</p>
 
       <div className="grid grid-cols-4 gap-4 mt-6">
         {[ 
