@@ -35,7 +35,7 @@ const items = [
   getItem('Promotion', 'sub2', <TeamOutlined />, [
     getItem('Promotion List', 'promotion_list'),
     getItem('Mobile Banner', 'mobile_banner'),
-    getItem('Website Banner', 'website_banner'),
+    getItem('Website Banner', 'web_banner'),
   ]),
   getItem('Customer Profile', '/dashboard/customer', <DesktopOutlined />),
   getItem('Customer Feedback', '/dashboard/feedback', <DesktopOutlined />),

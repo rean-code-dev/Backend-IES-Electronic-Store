@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-
-
+import { request } from '../share/request';
+import Select from "react-select";
 import baseUrl from '../../server/server_route'
 import  ImagePath  from '../../server/image_path';
 
@@ -12,8 +12,25 @@ function ProductPageDash() {
     const [perPage, setPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
 
+    const [showFormCrate, setShowFormCreateProduct] = useState(false)
     const [show, setShow] = useState(false)
     const [item, setItem] = useState({})
+
+    const [name, setNameEn] = useState("")
+    const [namekh, setNameKh] = useState("")
+
+    const [image, setImage] = useState("")
+    const [description, setDescription] = useState("")
+    const [status, setStatus] = useState("")
+    const [price, setPrice] = useState("")
+    const [barcode, setBarCode] = useState("")
+ 
+    const [quantity, setQuantity] = useState("")
+    const [discount, setDiscount] = useState("")
+    const [category_id, setCategoryId] = useState("")
+    const [categoryOptions, setCategoryOptions] = useState([]);
+
+   
 
     const getlistProduct = () => {
         axios({
@@ -28,6 +45,30 @@ function ProductPageDash() {
                 console.log("API Error:", err);
             });
     };
+
+
+    const onShowModalForm = () => {
+        setShowFormCreateProduct(true)
+    }
+
+    const onHideModalFromCreate = () => {
+        setShowFormCreateProduct(false)
+        setItem({})
+        clearForm()
+
+    }
+    const clearForm = () => {
+        setNameEn("")
+        setNameKh("")
+        setImage("")
+        setDescription("")
+        setStatus("")
+        setPrice("")
+        setBarCode("")
+        setCategoryId("")
+        setQuantity("")
+        setDiscount("")
+    }
 
     const onDelete_Product = () => {
         setShow(false)
@@ -60,7 +101,27 @@ function ProductPageDash() {
         setShow(false)
         setItem(null)
     }
-   
+
+
+    useEffect(() => {
+        const getListCategory = () => {
+            axios.get(baseUrl + 'category')
+                .then(res => {
+                    const data = res.data.result.map(item => ({ value: item.id, label: item.name }));
+                    setCategoryOptions(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        };
+
+        getListCategory();
+    }, []);
+
+
+    const handleChange = (selectedOption) => {
+        setCategoryId(selectedOption);
+    };
 
     useEffect(() => {
         getlistProduct();
@@ -70,7 +131,7 @@ function ProductPageDash() {
         <div style={{ padding: 10 }}>
             <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between' }}>
                 <h3>Product List</h3>
-                <Button variant="primary">New</Button>
+                <Button variant="primary" onClick={onShowModalForm}>Create New</Button>
             </div>
 
             {/* Per Page Selector */}
@@ -92,11 +153,12 @@ function ProductPageDash() {
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>CODE</th>
+                        <th>BAR CODE</th>
                         <th>NAME EN</th>
                         <th>NAME KH</th>
                         <th>QUANTITY</th>
                         <th>PRICE</th>
+                        <th>DISCOUNT</th>
                         <th>IMAGE</th>
                         {/* <th>DESCRIPTION</th> */}
                         <th>EXPIRATION DATE</th>
@@ -114,6 +176,7 @@ function ProductPageDash() {
                             <td>{item.name}</td>
                             <td>{item.nameKh}</td>
                             <td>{item.quantity}</td>
+                            <td>{item.price}</td>
                             <td>{item.price}</td>
                             <td>
                                     <img 
@@ -138,7 +201,7 @@ function ProductPageDash() {
                 </tbody>
             </Table>
 
-            <div className='modal show' style={{ display: 'block', position: 'initial' }}>
+            {/* <div className='modal show' style={{ display: 'block', position: 'initial' }}>
                 <Modal show={show} onHide={onHideModal} >
                     <Modal.Header closeButton>
                         <Modal.Title>Delete </Modal.Title>
@@ -149,6 +212,91 @@ function ProductPageDash() {
                     <Modal.Footer>
                         <Button variant='secondary' onClick={onHideModal}>No</Button>
                         <Button variant='primary' onClick={onDelete_Product}>Yes</Button>
+                    </Modal.Footer>
+
+                </Modal>
+
+            </div> */}
+
+             {/* Block  modal from insert/update*/}
+
+             <div className='modal show' style={{ display: 'block', position: 'initial' }}>
+                <Modal show={showFormCrate} onHide={onHideModalFromCreate} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{item.product_id == null ? "Create Product" : "Update Product"}</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                        <Form.Group className="mb-3" controlId="categorySelect">
+                            <Form.Label>Category</Form.Label>
+                            <Select
+                                value={category_id}
+                                onChange={handleChange}
+                                options={categoryOptions}
+                                placeholder="Search Category"
+                                isSearchable
+                            />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Name En</Form.Label>
+                                <Form.Control
+                                    value={name} //state Name En
+                                    type="input"
+                                    placeholder="Name En"
+                                    onChange={(event) => {
+                                        setNameEn(event.target.value)   //get value from user onchage => set value to name state 
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Name Kh</Form.Label>
+                                <Form.Control
+                                    value={namekh} //state Name Kh
+                                    type="input"
+                                    placeholder="Name kh"
+                                    onChange={(event) => {
+                                        setNameKh(event.target.value)   //get value from user onchage => set value to name state 
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    value={description}
+                                    as="textarea"
+                                    placeholder='Description'
+                                    rows={3}
+                                    onChange={(event) => {
+                                        setDescription(event.target.value)
+
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Status</Form.Label>
+                                <Form.Control
+                                    value={status}
+                                    type="input"
+                                    placeholder="Status"
+                                    onChange={(event) => {
+                                        setStatus(event.target.value)
+                                    }}
+                                />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formImageUpload">
+                                <Form.Label>Upload Image</Form.Label>
+                                <Form.Control type="file" accept="image/*" onChange={""} required />
+                                <Form.Text className="text-muted">Please upload a relevant image for the category.</Form.Text>
+                            </Form.Group>
+                            
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant='danger' onClick={onHideModalFromCreate}>Cancel</Button>
+                        <Button variant='secondary' onClick={clearForm}>Clear</Button>
+                        <Button variant='primary' onClick={""}>{item.category_id == null ? "Save" : "Update"}</Button>
                     </Modal.Footer>
 
                 </Modal>

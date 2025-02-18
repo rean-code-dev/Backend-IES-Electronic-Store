@@ -7,6 +7,7 @@ import EmployeePageDash from './dashboard_admin/employee_page/EmployeePageDash';
 import CustomerPageDash from './dashboard_admin/customer_page/CustomerPageDash';
 import HomePageDash from './dashboard_admin/home_page/HomePageDash';
 import OptionFeedBackDash from './dashboard_admin/customer_feedback_page/OptionFeedBackDash';
+import BannerPageDash from './dashboard_admin/banner_page/BannerPageDash';
 import HomePageView from './fontend_view_page/home_page_view/HomePageView';
 import AboutPageView from './fontend_view_page/about_page_view/AboutPageView';
 import RouteNoteFound from './dashboard_admin/route_not_found/RouteNotFound';
@@ -34,6 +35,7 @@ function App() {
           <Route path="employee" element={<EmployeePageDash/>} />
           <Route path="customer" element={<CustomerPageDash/>} />
           <Route path="feedback" element={<OptionFeedBackDash/>} />
+          <Route path="web_banner" element={<BannerPageDash/>} />
           <Route path="*" element={<RouteNoteFound/>} />
         </Route>
       {/* backend login register */}

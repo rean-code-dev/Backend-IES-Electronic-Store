@@ -5,6 +5,8 @@ import { Table, Button, Modal, Form } from "react-bootstrap"
 import { request } from '../share/request';
 import baseUrl from '../../server/server_route'
 import  ImagePath  from '../../server/image_path';
+
+
 function CategoryPageDash() {
 
 
@@ -50,8 +52,6 @@ function CategoryPageDash() {
         })
 
     }
-
-
 
     const onDelete_Category = () => {
         setShow(false)
@@ -177,7 +177,7 @@ function CategoryPageDash() {
                     <h3>Category</h3>
                 </div>
                 <div>
-                    <Button variant='primary' onClick={onShowModalForm}>New</Button>
+                    <Button variant='primary' onClick={onShowModalForm}> CreateNew</Button>
                 </div>
             </div>
             <Table striped bordered hover size='sm'>

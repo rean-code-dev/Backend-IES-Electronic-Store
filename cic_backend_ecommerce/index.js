@@ -16,7 +16,7 @@ const Product = require("./src/routes/product.route")
 const Cart = require("./src/routes/cart.route")
 const OrderDetail = require("./src/routes/order_detail.route")
 const Order = require("./src/routes/order.route")
-const Slider = require("./src/routes/carousel_slider.route")
+const Banner = require("./src/routes/banner.route")
 const OptionFeedback = require("./src/routes/option_feedback.route")
 const Promotion = require("./src/routes/promotion.route")
 
@@ -30,7 +30,7 @@ OptionFeedback(app,"/api/feedback")
 Promotion(app,"/api/promotion")
 Cart(app,"/api/cart")
 Order(app,"/api/order")
-Slider(app,"/api/slider")
+Banner(app,"/api/banner")
 OrderDetail(app,"/api/order_detail")
 
 

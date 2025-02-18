@@ -8,6 +8,13 @@ const getPromotonProduct = async (req,res) =>{
         result : result
     })
 }
+
+
+
+
+
+
+
 module.exports = {
     getPromotonProduct
 }

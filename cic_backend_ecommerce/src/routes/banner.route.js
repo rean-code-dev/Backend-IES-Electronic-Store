@@ -1,4 +1,4 @@
-const controller =  require("../controllers/carousel_slider.controller")
+const controller =  require("../controllers/banner.controller")
 
 const Slider = (app,base_route) =>{
     app.get(base_route,controller.getAll_Slider)
