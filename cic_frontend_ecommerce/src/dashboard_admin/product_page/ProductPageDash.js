@@ -49,6 +49,7 @@ function ProductPageDash() {
             });
     };
 
+    
 
     const onShowModalForm = () => {
         setShowFormCreateProduct(true)
@@ -130,6 +131,7 @@ function ProductPageDash() {
         getlistProduct();
     }, [page, perPage]); // Fetch data when page or perPage changes
 
+    
     return (
         <div style={{ padding: 10 }}>
             <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between' }}>
@@ -249,6 +251,12 @@ function ProductPageDash() {
                                         value={name}
                                         type="input"
                                         placeholder="name en"
+                                        rules={[
+                                            {
+                                              required: true,
+                                              message: 'Please input Name EN!',
+                                            },
+                                          ]}
                                         onChange={(event) => {
                                             setNameEn(event.target.value);
                                         }}
@@ -268,6 +276,8 @@ function ProductPageDash() {
                                     />
                                 </Form.Group>
                             </div>
+                            
+                         
                          
                             <div style={{ display: 'flex', gap: '16px' }}>
                                 {/* ===================== First Name ============== */}
