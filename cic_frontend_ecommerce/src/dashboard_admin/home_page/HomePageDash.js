@@ -1,12 +1,11 @@
-import { useState } from "react";
+
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
-import { Calendar, Package, ShoppingBag, ClipboardX } from "lucide-react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {Package, ShoppingBag, ClipboardX } from "lucide-react";
+
+
 
 const Dashboard = () => {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+
 
   const pieData = [
     { name: "Total Order", value: 10, color: "#D72638" },
@@ -28,31 +27,7 @@ const Dashboard = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Dashboard</h1>
-        <div className="flex items-center gap-4">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            placeholderText="Start Date"
-            className="px-4 py-2 border rounded-lg"
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            placeholderText="End Date"
-            className="px-4 py-2 border rounded-lg"
-          />
-          <button className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600">
-            <Calendar size={20} />
-            Filter Date
-          </button>
-        </div>
+       
       </div>
       <p className="text-gray-500">Hi, Sophun. Welcome back to Creative Innovation Center Admin!</p>
 
@@ -87,7 +62,6 @@ const Dashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-lg font-semibold mb-4">Chart Order</h2>
           <ResponsiveContainer width="100%" height={200}>

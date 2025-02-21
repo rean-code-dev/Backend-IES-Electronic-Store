@@ -21,6 +21,9 @@ function ProductPageDash() {
 
     const [image, setImage] = useState("")
     const [description, setDescription] = useState("")
+
+    const [expiration_date, setExpriationDate] = useState("")
+
     const [status, setStatus] = useState("")
     const [price, setPrice] = useState("")
     const [barcode, setBarCode] = useState("")
@@ -238,28 +241,76 @@ function ProductPageDash() {
                                 isSearchable
                             />
                             </Form.Group>
+                            <div style={{ display: 'flex', gap: '16px' }}>
+                                {/* ===================== First Name ============== */}
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ flex: 1 }}>
+                                    <Form.Label>Name EN</Form.Label>
+                                    <Form.Control
+                                        value={name}
+                                        type="input"
+                                        placeholder="name en"
+                                        onChange={(event) => {
+                                            setNameEn(event.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+
+                                {/* ======================= Last Name =================== */}
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ flex: 1 }}>
+                                    <Form.Label>Name KH</Form.Label>
+                                    <Form.Control
+                                        value={namekh}
+                                        type="input"
+                                        placeholder="Price"
+                                        onChange={(event) => {
+                                            setNameKh(event.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+                            </div>
+                         
+                            <div style={{ display: 'flex', gap: '16px' }}>
+                                {/* ===================== First Name ============== */}
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ flex: 1 }}>
+                                    <Form.Label>Quantity</Form.Label>
+                                    <Form.Control
+                                        value={quantity}
+                                        type="input"
+                                        placeholder="First Name"
+                                        onChange={(event) => {
+                                            setQuantity(event.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+
+                                {/* ======================= Last Name =================== */}
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1" style={{ flex: 1 }}>
+                                    <Form.Label>Price</Form.Label>
+                                    <Form.Control
+                                        value={price}
+                                        type="input"
+                                        placeholder="Price"
+                                        onChange={(event) => {
+                                            setPrice(event.target.value);
+                                        }}
+                                    />
+                                </Form.Group>
+                            </div>
+
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Name En</Form.Label>
+                                <Form.Label>Expiration Date</Form.Label>
                                 <Form.Control
-                                    value={name} //state Name En
+                                    value={expiration_date}
                                     type="input"
-                                    placeholder="Name En"
+                                    placeholder="expiration date"
                                     onChange={(event) => {
-                                        setNameEn(event.target.value)   //get value from user onchage => set value to name state 
+                                        setExpriationDate(event.target.value)
                                     }}
                                 />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Name Kh</Form.Label>
-                                <Form.Control
-                                    value={namekh} //state Name Kh
-                                    type="input"
-                                    placeholder="Name kh"
-                                    onChange={(event) => {
-                                        setNameKh(event.target.value)   //get value from user onchage => set value to name state 
-                                    }}
-                                />
-                            </Form.Group>
+                           
+                            
+                            
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control

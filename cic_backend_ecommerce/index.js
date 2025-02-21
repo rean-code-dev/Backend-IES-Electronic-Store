@@ -24,15 +24,14 @@ const Promotion = require("./src/routes/promotion.route")
 Product(app,"/api/product")
 Category(app,"/api/category")
 Employee(app,"/api/employee")
-WishList(app,"/api/wishlist")
-Payment_methode(app,"/api/payment_menthode")
+WishList(app,"/api/favorite")
+Payment_methode(app,"/api/payment")
 OptionFeedback(app,"/api/feedback")
 Promotion(app,"/api/promotion")
 Cart(app,"/api/cart")
 Order(app,"/api/order")
 Banner(app,"/api/banner")
 OrderDetail(app,"/api/order_detail")
-
 
 
 

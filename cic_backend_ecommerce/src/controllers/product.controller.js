@@ -50,7 +50,7 @@ const getOne_product = async (req, res) => {
 
 ///========================  create Product =================
 const create_product = (req, res) => {
-  
+
     var {
         category_id,
         barcode,
@@ -64,7 +64,7 @@ const create_product = (req, res) => {
     } = req.body;
 
     var message = {}
-    var filename  = null;
+    var filename  = image;
     if (req.file) {
         filename = req.file.filename
     }

@@ -51,6 +51,7 @@ const items = [
   ]),
   getItem('Setting', 'sub3', <TeamOutlined />, [
     getItem('Payment Methods', 'payment_methods'),
+    getItem('Exchange', 'exchange'),
   
   ]),
   getItem('Logout', 'logout', <FileOutlined />),
