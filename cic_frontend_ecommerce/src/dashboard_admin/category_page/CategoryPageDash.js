@@ -1,334 +1,12 @@
-
-// import axios from 'axios'
-// import { useEffect, useState } from 'react'
-// import { Table, Button, Modal, Form } from "react-bootstrap"
-// import { request } from '../share/request';
-// import baseUrl from '../../server/server_route'
-// import  ImagePath  from '../../server/image_path';
-
-
-// function CategoryPageDash() {
-
-
-//     const [show, setShow] = useState(false)
-//     const [showFormCrate, setShowFormCreate] = useState(false)
-//     const [result, setList] = useState([])
-//     const [item, setItem] = useState({})
-
-//     const [name_en, setNameEn] = useState("")
-//     const [name_kh, setNameKh] = useState("")
-
-//     const [image, setImage] = useState("")
-//     const [description, setDescription] = useState("")
-//     const [status, setStatus] = useState("")
-
-
-//     useEffect(() => {
-//         getlist_category()
-//     }, [])
-
-
-//     const getlist_category = () => {
-//         axios({
-//             url: baseUrl + "category",
-//             method: 'get',
-
-//         }).then(res => {
-//             //api respone
-//             var data = res.data
-//             setList(data.result)
-//         }).catch(err => {
-//             console.log(err)
-//         })
-
-//         request("category", "get").then(res => {
-//             //api respone
-//             var data = res.data
-//             setList(data.result)
-
-
-//         }).catch(err => {
-//             console.log(err)
-//         })
-
-//     }
-
-//     const onDelete_Category = () => {
-//         setShow(false)
-//         var category_id = item.category_id
-
-//         axios({
-//             url: baseUrl + "category/" + category_id,
-//             method: 'delete',
-
-//         }).then(res => {
-//             //api respone
-//             var data = res.data
-//             // setList(data.message)
-//             //getlist_category()
-//             var tmp_data = result.filter((item) => item.category_id != category_id)
-//             setList(tmp_data)
-
-
-//         }).catch(err => {
-//             console.log(err)
-//         })
-//     }
-//     const onClick_Delete = (param) => {
-//         setItem(param)
-//         setShow(true)
-
-//     }
-//     const onHideModal = () => {
-//         setShow(false)
-//         setItem(null)
-//     }
-//     const clearForm = () => {
-//         setNameEn("")
-//         setNameKh("")
-//         setImage("")
-//         setDescription("")
-//         setStatus("")
-//     }
-
-//     const onHideModalFromCreate = () => {
-//         setShowFormCreate(false)
-//         setItem({})
-//         clearForm()
-
-//     }
-//     // const handleSubmit = async (e) => {
-//     //     e.preventDefault();
-//     //     if (!selectedFile) {
-//     //         alert("Please select an image to upload.");
-//     //         return;
-//     //     }
-
-//     //     const formData = new FormData();
-//     //     formData.append("image", selectedFile);
-//     //     formData.append("name_en", nameEn);
-//     //     formData.append("name_kh", nameKh);
-
-//     //     try {
-//     //         const response = await axios.post("http://localhost:5000/upload", formData, {
-//     //             headers: { "Content-Type": "multipart/form-data" },
-//     //         });
-
-//     //         alert("Image uploaded successfully!");
-//     //         fetchCategories(); // Refresh category list
-//     //     } catch (error) {
-//     //         console.error("Upload error:", error);
-//     //         alert("Upload failed!");
-//     //     }
-//     // };
-
-
-//     //=============  save category ============
-//     const onSave_Category = () => {
-//         onHideModalFromCreate()
-//         var param = {
-//             "name_en": name_en,
-//             "name_kh": name_kh,
-//             "image": image,
-//             "description": description,
-//             "parent_id": null,
-//             "status": status
-//         }
-
-//         var url = baseUrl + "category"
-//         var method = 'post'
-//         //Case update
-//         if (item.category_id != null) {
-//             param.category_id = item.category_id   //add new key "category_id " to param 
-//             method = 'put'
-//         }
-
-//         axios({
-//             url: url,
-//             method: method,
-//             data: param
-//         }).then(res => {
-//             if (res) {
-//                 getlist_category();
-
-//             }
-//         })
-//     }
-
-//     const onShowModalForm = () => {
-//         setShowFormCreate(true)
-//     }
-
-//     const onClick_edit = (item) => {
-//         setItem(item)
-//         setNameEn(item.name_en)
-//         setNameKh(item.name_kh)
-//         setImage(item.image)
-//         setDescription(item.description)
-//         setStatus(item.status)
-//         setShowFormCreate(true)
-
-//     }
-
-//     return (
-//         <div style={{ padding: 10 }}>
-//             <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between' }}>
-//                 <div>
-//                     <h3>Category</h3>
-//                 </div>
-//                 <div>
-//                     <Button variant='primary' onClick={onShowModalForm}> CreateNew</Button>
-//                 </div>
-//             </div>
-//             <Table striped bordered hover size='sm'>
-//                 <thead>
-//                     <tr>
-//                         <th>No</th>
-//                         <th>NAME EN</th>
-//                         <th>NAME KH</th>
-//                         <th>IMAGE</th>
-//                         <th>DESCRIPTION</th>
-//                         <th>STATUS</th>
-//                         <th>CREATE</th>
-//                         <th>ACTION</th>
-//                     </tr>
-
-//                 </thead>
-//                 <tbody>
-//                     {result.map((item, index) => {
-//                         return (
-//                             <tr key={index}>
-//                                 <td>{index + 1}</td>
-//                                 <td>{item.name_en}</td>
-//                                 <td>{item.name_kh}</td>
-//                                 <td>
-//                                     <img 
-//                                         src={`${ImagePath}/${item.image}`} 
-//                                         alt="Uploaded" 
-//                                         width="50" 
-//                                         height="50"
-//                                         style={{ objectFit: 'cover', borderRadius: '5px' }}
-//                                     />
-//                                 </td>
-//                                 <td>{item.description}</td>
-//                                 <td>{item.status}</td>
-//                                 <td>{new Date(item.create_at).toLocaleDateString('en-GB')}</td>
-//                                 <td>
-//                                     <Button onClick={() => onClick_edit(item)} variant="outline-success">Edit</Button>{' '}
-//                                     <Button onClick={() => onClick_Delete(item)} variant="outline-danger">Delete</Button>
-//                                 </td>
-//                             </tr>
-//                         )
-//                     })}
-
-//                 </tbody>
-//             </Table>
-//             <div className='modal show' style={{ display: 'block', position: 'initial' }}>
-//                 <Modal show={show} onHide={onHideModal} >
-//                     <Modal.Header closeButton>
-//                         <Modal.Title>Delete </Modal.Title>
-//                     </Modal.Header>
-//                     <Modal.Body>
-//                         <p>Are you sure to remove?</p>
-//                     </Modal.Body>
-//                     <Modal.Footer>
-//                         <Button variant='secondary' onClick={onHideModal}>No</Button>
-//                         <Button variant='primary' onClick={onDelete_Category}>Yes</Button>
-//                     </Modal.Footer>
-
-//                 </Modal>
-
-//             </div>
-
-
-//             {/* Block  modal from insert/update*/}
-
-//             <div className='modal show' style={{ display: 'block', position: 'initial' }}>
-//                 <Modal show={showFormCrate} onHide={onHideModalFromCreate} >
-//                     <Modal.Header closeButton>
-//                         <Modal.Title>{item.category_id == null ? "Create Category" : "Update Category"}</Modal.Title>
-//                     </Modal.Header>
-
-//                     <Modal.Body>
-//                         <Form>
-//                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-//                                 <Form.Label>Name En</Form.Label>
-//                                 <Form.Control
-//                                     value={name_en} //state Name En
-//                                     type="input"
-//                                     placeholder="Name En"
-//                                     onChange={(event) => {
-//                                         setNameEn(event.target.value)   //get value from user onchage => set value to name state 
-//                                     }}
-
-//                                 />
-//                             </Form.Group>
-//                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-//                                 <Form.Label>Name Kh</Form.Label>
-//                                 <Form.Control
-//                                     value={name_kh} //state Name Kh
-//                                     type="input"
-//                                     placeholder="Name kh"
-//                                     onChange={(event) => {
-//                                         setNameKh(event.target.value)   //get value from user onchage => set value to name state 
-//                                     }}
-//                                 />
-//                             </Form.Group>
-//                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-//                                 <Form.Label>Description</Form.Label>
-//                                 <Form.Control
-//                                     value={description}
-//                                     as="textarea"
-//                                     placeholder='Description'
-//                                     rows={3}
-//                                     onChange={(event) => {
-//                                         setDescription(event.target.value)
-
-//                                     }}
-//                                 />
-//                             </Form.Group>
-//                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-//                                 <Form.Label>Status</Form.Label>
-//                                 <Form.Control
-//                                     value={status}
-//                                     type="input"
-//                                     placeholder="Status"
-//                                     onChange={(event) => {
-//                                         setStatus(event.target.value)
-//                                     }}
-//                                 />
-//                             </Form.Group>
-
-//                             <Form.Group className="mb-3" controlId="formImageUpload">
-//                                 <Form.Label>Upload Image</Form.Label>
-//                                 <Form.Control type="file" accept="image/*" onChange={""} required />
-//                                 <Form.Text className="text-muted">Please upload a relevant image for the category.</Form.Text>
-//                             </Form.Group>
-
-//                         </Form>
-//                     </Modal.Body>
-//                     <Modal.Footer>
-//                         <Button variant='danger' onClick={onHideModalFromCreate}>Cancel</Button>
-//                         <Button variant='secondary' onClick={clearForm}>Clear</Button>
-//                         <Button variant='primary' onClick={onSave_Category}>{item.category_id == null ? "Save" : "Update"}</Button>
-//                     </Modal.Footer>
-
-//                 </Modal>
-
-//             </div>
-//         </div>
-//     );
-// }
-// export default CategoryPageDash;
-
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Input, Upload, message, Tag, Spin} from 'antd';
-import { PlusOutlined, SearchOutlined, LoadingOutlined} from '@ant-design/icons';
+import { Table, Button, Modal, Form, Input, Upload, message, Tag } from 'antd';
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import baseUrl from '../../server/server_route';
 import ImagePath from '../../server/image_path';
 import Colors from '../../components/colors/web_colors';
 import { Search, RefreshCw, Filter, Download, Eye } from "lucide-react";
+import LoadingOverlay from '../../components/custom_loading';
 
 function CategoryPageDash() {
     const [show, setShow] = useState(false);
@@ -339,23 +17,39 @@ function CategoryPageDash() {
     const [filteredData, setFilteredData] = useState([]); // For search functionality
     const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(false);
+    const [dateTime, setDateTime] = useState(new Date());
 
     const [form] = Form.useForm();
 
+
+      useEffect(() => {
+            const interval = setInterval(() => {
+                setDateTime(new Date());
+            }, 1000);
+    
+            return () => clearInterval(interval);
+        }, []);
+    
     useEffect(() => {
+        
         getlist_category();
     }, []);
 
     const getlist_category = async () => {
+        setLoading(true); // Show loading
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         try {
             const res = await axios.get(baseUrl + 'category');
             setList(res.data.result);
         } catch (err) {
             console.log(err);
         }
+        setLoading(false);
     };
 
     const onDelete_Category = async () => {
+        setLoading(true); // Show loading
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         setShow(false);
         try {
             await axios.delete(`${baseUrl}category/${item.category_id}`);
@@ -364,11 +58,15 @@ function CategoryPageDash() {
         } catch (err) {
             console.log(err);
         }
+        setLoading(false);
     };
 
-    const onClick_Delete = (param) => {
+    const onClick_Delete = async(param) => {
+        setLoading(true); // Show loading
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         setItem(param);
         setShow(true);
+        setLoading(false);
     };
 
     const onHideModal = () => {
@@ -380,6 +78,7 @@ function CategoryPageDash() {
         setShowFormCreate(false);
         setItem({});
         form.resetFields();
+       
     };
 
     const onSave_Category = async () => {
@@ -404,14 +103,14 @@ function CategoryPageDash() {
         }
     };
 
-    const onClick_edit = async  (category) => {
-        
+    const onClick_edit = async (category) => {
         setLoading(true); // Show loading
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         setItem(category);
         form.setFieldsValue(category);
         setShowFormCreate(true);
+        setLoading(false);
     };
 
 
@@ -425,51 +124,42 @@ function CategoryPageDash() {
         setFilteredData(filtered);
     };
 
-    
+
 
     return (
         <div style={{ padding: 20 }}>
 
-             {/* Full-Screen Loading Spinner */}
-             {loading && (
-                <div
-                    style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: "rgba(255, 255, 255, 0.8)",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        zIndex: 9999,
-                    }}
-                >
-                    <Spin
-                        indicator={<LoadingOutlined style={{ fontSize: 48, color: "#C60925" }} spin />}
-                    />
-                </div>
-            )}
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+            {/* Loading Spinner */}
+            <LoadingOverlay loading={loading} />
+            
+            <div style={{ display: 'flex', justifyContent: 'space-between',}}>
                 <h3>Category</h3>
+                <span style={{ fontWeight: "bold" }}>{dateTime.toLocaleString()}</span>
+
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                <Button type="primary" onClick={() => setShowFormCreate(true)} style={{ backgroundColor: '#c69651', borderColor: '#c69651' }}>
+                <button
+                    className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1"
+                    onClick={async () => {
+                        setLoading(true); // Show loading
+                        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate delay
+                        setLoading(false); // Hide loading
+                        setShowFormCreate(true); // Show form
+                    }}
+                >
                     + Add New
-                </Button>
-               
-                <div className="flex items-center gap-2">
+                </button>
+                <div className="flex items-center gap-2 py-2 px-4 rounded-md bg-white shadow-md">
                     {/* Search Input */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <Input
-                        placeholder="Search..."
-                        value={searchText}
-                        onChange={onSearch}
-                        style={{ width: 250 }}
-                    />
-                    <Button icon={<SearchOutlined />} style={{ backgroundColor: '#c69651', color: 'white', borderColor: '#c69651' }} />
-                </div>
+                    <div className="flex items-center gap-2 py-2">
+                        <Input
+                            placeholder="Search..."
+                            value={searchText}
+                            onChange={onSearch}
+                            className='w-[300px] h-9 text-lg px-4'
+                        />
+                        <Button icon={<SearchOutlined />} className='bg-[#c69651] text-white border-[#c69651] h-9 px-4 text-lg' />
+                    </div>
 
                     {/* Select Dropdown */}
                     {/* <select className="border border-[#b6823e] rounded-md px-3 py-1">
@@ -484,25 +174,26 @@ function CategoryPageDash() {
                     </button> */}
 
                     {/* Refresh Button */}
-                    <button className="bg-[#b6823e] text-white px-3 py-1 rounded-md flex items-center gap-1">
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
                         <RefreshCw size={16} />
                         Refresh
                     </button>
 
                     {/* Filter Button */}
-                    <button className="bg-[#b6823e] text-white px-3 py-1 rounded-md flex items-center gap-1">
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
                         <Filter size={16} />
                         Filter
                     </button>
 
                     {/* Export Button */}
-                    <button className="bg-[#b6823e] text-white px-3 py-1 rounded-md flex items-center gap-1">
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
                         <Download size={16} />
                         Export
                     </button>
                 </div>
 
             </div>
+            
             <Table dataSource={result} rowKey='category_id' bordered
                 components={{
                     header: {
@@ -539,33 +230,33 @@ function CategoryPageDash() {
                     )}
                 />
                 <Table.Column title='Created' render={(text, record) => new Date(record.create_at).toLocaleDateString('en-GB')} />
+
+                {/* Button Edit and Delete */}
                 <Table.Column
                     title="Action"
                     render={(text, record) => (
-                        <div className="flex gap-2">
-                         <Button
-                            onClick={() => onClick_edit(record)}
-                            style={{
-                            border: `1px solid ${Colors.color_button.button_red} `, // Red Border
-                            color: Colors.color_button.button_red, // Red Text
-                            backgroundColor: "white",
-                            }}
-                        >
-                            Edit
-                        </Button>
-                        <Button
-                            onClick={() => onClick_Delete(record)}
-                            style={{
-                            border: `1px solid ${Colors.color_button.button_red} `, // Red Border
-                            color: Colors.color_button.button_red, // Red Text
-                            backgroundColor: "white",
-                            }}
-                        >
-                            Delete
-                        </Button>
+                        <div className="flex gap-2 ">
+                            <Button
+                                onClick={() => onClick_edit(record)}
+                                style={{
+                                    border: `1px solid ${Colors.color_button.button_green} `, // green Border
+                                    color: Colors.color_button.button_green, // green Text
+                                    backgroundColor: "white",
+                                }}
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                onClick={() => onClick_Delete(record)}
+                                style={{
+                                    border: `1px solid ${Colors.color_button.button_red} `, // Red Border
+                                    color: Colors.color_button.button_red, // Red Text
+                                    backgroundColor: "white",
+                                }}
+                            >Delete</Button>
                         </div>
                     )}
-                    />
+                />
             </Table>
 
             {/* Delete Modal */}

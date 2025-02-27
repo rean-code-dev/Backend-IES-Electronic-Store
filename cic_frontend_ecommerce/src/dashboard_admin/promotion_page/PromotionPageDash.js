@@ -1,248 +1,168 @@
-// import React from 'react'
-// import { Table, Button, Form } from 'react-bootstrap';
 
-// function PromotionPageDash() {
-//     return (
-//         <div style={{ padding: 10 }}>
-//             <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between' }}>
-//                 <h3>Promotion</h3>
-//                 <Button variant="primary">New</Button>
-//             </div>
+import React, { useEffect, useState } from 'react';
+import Colors from '../../components/colors/web_colors';
+import { Table, Button, Modal, Form, Input, Select, Upload, Pagination, Tag } from 'antd';
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import { Search, RefreshCw, Filter, Download, Eye } from "lucide-react";
 
-//             <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between' }}>
-//             <h3>Showing 1 to 2 of 2 entries</h3>
-//             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-//                 <span>Show page</span>
-//                 <Form.Select
-//                     style={{ width: '70px' }}
-//                     // value={perPage}
-//                     // onChange={(e) => setPerPage(parseInt(e.target.value))}
-//                 >
-//                     <option value="10">10</option>
-//                     <option value="20">20</option>
-//                     <option value="50">50</option>
-//                 </Form.Select>
-//             </div>
 
-//             </div>
-//              {/* Per Page Selector */}
+const { Option } = Select;
+
+
+const onClick_edit = async (category) => {
+  // setLoading(true); // Show loading
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  // setLoading(false);
+};
+const onClick_Delete = (param) => {
+  // setItem(param);
+  // setShow(true);
+};
+function PromotionPageDash() {
+   const [dateTime, setDateTime] = useState(new Date());
+      const [showFormCreate, setShowFormCreateProduct] = useState(false);
+      const [page, setPage] = useState(1);
+      const [perPage, setPerPage] = useState(5);
+      const [show, setShow] = useState(false);
+      const [item, setItem] = useState({});
+      const [searchText, setSearchText] = useState("");
+      const [loading, setLoading] = useState(false);
+      const [form] = Form.useForm();
+
+    useEffect(() => {
+           const interval = setInterval(() => {
+               setDateTime(new Date());
+           }, 1000);
+   
+           return () => clearInterval(interval);
+       }, []);
+
+
+
+    return (
+        <div style={{ padding: 10 }}>
+            {/* Header Section */}
+            <div style={{ padding: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3>Promotion</h3>
+                <span style={{ fontWeight: "bold" }}>{dateTime.toLocaleString()}</span>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                <button
+                    className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1"
+                    onClick={async () => {
+                        setLoading(true); // Show loading
+                        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate delay
+                        setLoading(false); // Hide loading
+                        setShowFormCreateProduct(true); // Show form
+                    }}
+                >
+                    + Add New
+                </button>
+                <div className="flex items-center gap-2 py-2 px-4 rounded-md bg-white shadow-md">
+                    {/* Search Input */}
+                    <div className="flex items-center gap-2 py-2">
+                        <Input
+                            placeholder="Search..."
+                            value={searchText}
+                            onChange={""}
+                            className='w-[300px] h-9 text-lg px-4'
+                        />
+                        <Button icon={<SearchOutlined />} className='bg-[#c69651] text-white border-[#c69651] h-9 px-4 text-lg' />
+                    </div>
+
+                    <div className="flex items-center gap-2 py-2">
+                        {/* Custom Select Dropdown */}
+                        <select
+                            value={perPage}
+                            onChange={(e) => setPerPage(Number(e.target.value))}
+                            className="border border-[#b6823e] rounded-md px-3 py-2"
+                        >
+                            <option value="all">All</option>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                            <option value={50}>50</option>
+                        </select>
+
+                        {/* Eye Icon Button */}
+                        <Button icon={<Eye />} className='bg-[#c69651] text-white border-[#c69651] h-9 px-4 text-lg' />
+                    </div>
+
+
+                    {/* Refresh Button */}
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
+                        <RefreshCw size={16} />
+                        Refresh
+                    </button>
+
+                    {/* Filter Button */}
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
+                        <Filter size={16} />
+                        Filter
+                    </button>
+
+                    {/* Export Button */}
+                    <button className="bg-[#b6823e] text-white px-3 py-2 rounded-md flex items-center gap-1">
+                        <Download size={16} />
+                        Export
+                    </button>
+                </div>
+
+
+            </div>
+
+           
             
-//             <Table striped bordered hover size='sm'>
-//                 <thead>
-//                     <tr>
-//                         <th>No</th>
-//                         <th>Promotion Type</th>
-//                         <th>Start Date</th>
-//                         <th>End Date</th>
-//                         <th>Active</th>
-//                         <th>Amount</th>
-//                         <th>Percentage</th>
-//                         <th>Max. Promotion Amount</th>
-//                         <th>After Promotion</th>
-//                         <th>Create Date</th>
-//                         <th>Create By</th>
-//                         <th>ACTION</th>
-//                     </tr>
 
-//                 </thead>
-//                 <tbody>
-//                     {/* {result.map((item, index) => {
-//                         return (
-//                             <tr key={index}>
-//                                 <td>{index + 1}</td>
-//                                 <td>{item.name_en}</td>
-//                                 <td>{item.name_kh}</td>
-//                                 <td>
-//                                     <img 
-//                                         src={`${ImagePath}/${item.image}`} 
-//                                         alt="Uploaded" 
-//                                         width="50" 
-//                                         height="50"
-//                                         style={{ objectFit: 'cover', borderRadius: '5px' }}
-//                                     />
-//                                 </td>
-//                                 <td>{item.description}</td>
-//                                 <td>{item.status}</td>
-//                                 <td>{new Date(item.create_at).toLocaleDateString('en-GB')}</td>
-//                                 <td>
-//                                     <Button onClick={() => onClick_edit(item)} variant="outline-success">Edit</Button>{' '}
-//                                     <Button onClick={() => onClick_Delete(item)} variant="outline-danger">Delete</Button>
-//                                 </td>
-//                             </tr>
-//                         )
-//                     })} */}
+            {/* Table */}
+            <Table
+                pagination={false}
+                rowKey="product_id"
+                bordered
+                components={{
+                    header: {
+                        cell: (props) => (
+                            <th
+                                {...props}
+                                style={{
+                                    backgroundColor: Colors.color_primary_red.bg_primary_red,
+                                    color: 'white',
+                                    textAlign: 'center',
+                                }}
+                            />
+                        ),
+                    },
+                }}>
+                <Table.Column title="No" dataIndex="no" key="no" />
+                <Table.Column title="Promotion Type" dataIndex="promotion_type" key="promotion_type" />
+                <Table.Column title="Start Date" dataIndex="start_date" key="start_date" />
+                <Table.Column title="End Date" dataIndex="end_date" key="end_date" />
+                <Table.Column title="Active" dataIndex="active" key="active" />
+                <Table.Column title="Amount" dataIndex="amount" key="amount" />
+                <Table.Column title="Percentage" dataIndex="percentage" key="percentage" />
+                <Table.Column title="Max. Promotion Amount" dataIndex="max_promotion" key="max_promotion" />
+                <Table.Column title="After Promotion" dataIndex="after_promotion" key="after_promotion" />
+                <Table.Column title="Create Date" dataIndex="create_date" key="create_date" />
+                <Table.Column title="Create By" dataIndex="create_by" key="create_by" />
+                <Table.Column
+                    title="ACTION"
+                    key="action"
+                    render={(_, record) => (
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <Button type="link" onClick={() => onClick_edit(record)} style={{ color: 'green' }}>
+                                Edit
+                            </Button>
+                            <Button type="link" onClick={() => onClick_Delete(record)} style={{ color: 'red' }}>
+                                Delete
+                            </Button>
+                        </div>
+                    )}
+                />
+            </Table>
+        </div>
+    );
+}
 
-//                 </tbody>
-//             </Table>
-//         </div>
-        
-//     )
-// }   
-
-// export default PromotionPageDash
-
-
-
-// import React from 'react';
-// import { Button, Form, Input, InputNumber } from 'antd';
-// const layout = {
-//   labelCol: {
-//     span: 8,
-//   },
-//   wrapperCol: {
-//     span: 16,
-//   },
-// };
-// const validateMessages = {
-//   required: '${label} is required!',
-//   types: {
-//     email: '${label} is not a valid email!',
-//     number: '${label} is not a valid number!',
-//   },
-//   number: {
-//     range: '${label} must be between ${min} and ${max}',
-//   },
-// };
-// const onFinish = (values) => {
-//   console.log(values);
-// };
-// const PromotionPageDash = () => (
-//   <Form
-//     {...layout}
-//     name="nest-messages"
-//     onFinish={onFinish}
-//     style={{
-//       maxWidth: 600,
-//     }}
-//     validateMessages={validateMessages}
-//   >
-//     <Form.Item
-//       name={['user', 'name']}
-//       label="Name"
-//       rules={[
-//         {
-//           required: true,
-//         },
-//       ]}
-//     >
-//       <Input />
-//     </Form.Item>
-//     <Form.Item
-//       name={['user', 'email']}
-//       label="Email"
-//       rules={[
-//         {
-//           type: 'email',
-//         },
-//       ]}
-//     >
-//       <Input />
-//     </Form.Item>
-//     <Form.Item
-//       name={['user', 'age']}
-//       label="Age"
-//       rules={[
-//         {
-//           type: 'number',
-//           min: 0,
-//           max: 99,
-//         },
-//       ]}
-//     >
-//       <InputNumber />
-//     </Form.Item>
-//     <Form.Item name={['user', 'website']} label="Website">
-//       <Input />
-//     </Form.Item>
-//     <Form.Item name={['user', 'introduction']} label="Introduction">
-//       <Input.TextArea />
-//     </Form.Item>
-//     <Form.Item label={null}>
-//       <Button type="primary" htmlType="submit">
-//         Submit
-//       </Button>
-//     </Form.Item>
-//   </Form>
-// );
-// export default PromotionPageDash;
-
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sydney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-const PromotionPageDash = () =>  {
-  return (
-    <Table columns={columns} dataSource={data} />
-  );
-
-} 
 export default PromotionPageDash;
